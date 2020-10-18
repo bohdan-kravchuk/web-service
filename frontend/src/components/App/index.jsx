@@ -1,11 +1,11 @@
 import React from 'react';
-import SignUp from '../../scenes/Auth/components/SignUp';
+import Routing from 'containers/Routing';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 const App = () => {
   return (
     <Router>
-      <SignUp />
+      <Routing />
     </Router>
   );
 }

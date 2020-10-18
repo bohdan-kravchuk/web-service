@@ -10,7 +10,7 @@ const SignIn = () => {
 
       <div className={styles.subtitle}>
         <span>New Here? </span>
-        <Link to='/signup'>Create an account</Link>
+        <Link to='/auth/signup'>Create an account</Link>
       </div>
 
       <Form className={styles.form}>

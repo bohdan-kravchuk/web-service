@@ -22,7 +22,7 @@ const SignUp = () => {
         <Button variant="primary">Sign Up</Button>
 
         <div>
-          <Link to='/signin'> Already Signed up?</Link>
+          <Link to='/auth/signin'> Already Signed up?</Link>
         </div>
       </Form>
     </div>
