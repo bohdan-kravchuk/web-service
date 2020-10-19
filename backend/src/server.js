@@ -1,13 +1,16 @@
 import express from 'express';
+import cors from 'cors';
 import mongoose from 'mongoose';
-import { env } from './env.js';
+import { env } from './env';
+import routes from './routes';
 
 const { app: { port }, mongoDbUrl } = env;
-const server = express();
+const app = express();
 
-server.get('/', (req, res) => {
-  res.send('Hello world!')
-});
+app.use(cors());
+app.use(express.json());
+
+routes(app);
 
 async function start() {
   try {
@@ -15,7 +18,7 @@ async function start() {
       useNewUrlParser: 'true',
       useUnifiedTopology: 'true'
     });
-    server.listen(port, () => {
+    app.listen(port, () => {
       console.log(`Server is running at ${port}`);
     });
   } catch (e) {

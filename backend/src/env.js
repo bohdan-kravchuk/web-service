@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv';
-import { getOsEnv } from './helpers/pathHelper.js';
+import { getOsEnv } from './helpers/pathHelper';
 
 dotenv.config();
 
