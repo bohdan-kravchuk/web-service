@@ -1,9 +1,13 @@
 {
   "compilerOptions": {
+    "jsx": "react",
     "module": "commonjs",
-    "target": "es2016",
-    "jsx": "preserve",
-    "baseUrl": "src"
+    "target": "es2020",
+    "baseUrl": "src",
+    "checkJs": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": [
+    "node_modules"
+  ]
 }
