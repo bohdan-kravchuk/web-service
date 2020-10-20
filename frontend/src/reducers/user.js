@@ -1,7 +1,7 @@
 import { signInUserRoutine, signUpUserRoutine } from 'scenes/Auth/routines';
 
 const initialState = {
-  isAuthorized: false,
+  isAuthorized: true,
   user: {},
   isLoading: false
 };
