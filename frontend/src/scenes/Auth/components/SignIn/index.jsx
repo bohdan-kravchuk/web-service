@@ -11,9 +11,9 @@ const initialValues = {
   password: ''
 };
 
-const SignIn = ({ loginUser }) => {
+const SignIn = ({ signInUser }) => {
   const onSubmit = values => {
-    loginUser(values);
+    signInUser(values);
   };
 
   return (

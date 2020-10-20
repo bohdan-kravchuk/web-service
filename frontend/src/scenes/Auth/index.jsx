@@ -1,15 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import SignUp from 'scenes/Auth/components/SignUp';
 import SignIn from 'scenes/Auth/components/SignIn';
-import { connect } from 'react-redux';
 import { signUpUserRoutine, signInUserRoutine } from 'scenes/Auth/routines';
 
-const Auth = ({ signInUser, addNewUser }) => {
+const Auth = ({ signInUser, signUpUser }) => {
   return (
     <Switch>
-      <Route exact path='/auth/signin' component={SignIn} />
-      <Route exact path='/auth/signup' component={SignUp} />
+      <Route exact path='/auth/signin' render={props => (<SignIn {...props} signInUser={signInUser} />)} />
+      <Route exact path='/auth/signup' render={props => (<SignUp {...props} signUpUser={signUpUser} />)} />
       <Redirect to='/auth/signin' />
     </Switch>
   );

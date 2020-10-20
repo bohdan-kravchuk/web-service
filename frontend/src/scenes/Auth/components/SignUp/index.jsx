@@ -13,12 +13,12 @@ const initialValues = {
   confirmPassword: ''
 };
 
-const SignUp = ({ addNewUser }) => {
+const SignUp = ({ signUpUser }) => {
   const onSubmit = values => {
     const { email, password, fullName } = values;
     const user = { email, password, fullName };
 
-    addNewUser(user);
+    signUpUser(user);
   };
 
   return (

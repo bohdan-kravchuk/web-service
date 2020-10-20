@@ -4,8 +4,9 @@ import { signIn, signUp } from 'services/authService';
 
 function* signUpUser({ payload }) {
   try {
-    yield call(signUp, payload);
-    yield put(signUpUserRoutine.success(payload));
+    const user = yield call(signUp, payload);
+    console.log(user.id);
+    yield put(signUpUserRoutine.success(user));
   } catch (error) {
     console.log(error.message);
   }
