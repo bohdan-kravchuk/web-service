@@ -1,32 +1,49 @@
 import React from 'react';
 import styles from './styles.module.sass';
-import { Form, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Formik, Form } from 'formik';
+import { signUpValSchema } from 'common/models/formik/validationSchema';
+import InputField from 'components/InputField';
 
-const SignUp = () => {
+const initialValues = {
+  fullName: '',
+  email: '',
+  password: '',
+  confirmPassword: ''
+};
+
+const SignUp = ({ addNewUser }) => {
+  const onSubmit = values => {
+    const { email, password, fullName } = values;
+    const user = { email, password, fullName };
+
+    addNewUser(user);
+  };
+
   return (
     <div className={styles.SignUp}>
       <h1 className={styles.title}>Sign up</h1>
 
-      <Form className={styles.form}>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="user@gmail.com" />
-        </Form.Group>
+      <Formik initialValues={initialValues} validationSchema={signUpValSchema} onSubmit={onSubmit} >
+        <Form>
+          <InputField label="Full Name" name="fullName" type="text" placeholder="John Snow" />
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="••••••••" />
-        </Form.Group>
+          <InputField label="Email" name="email" type="email" placeholder="example@gmail.com" />
 
-        <Button variant="primary">Sign Up</Button>
+          <InputField label="Password" name="password" type="password" placeholder="••••••••" />
 
-        <div>
-          <Link to='/auth/signin'> Already Signed up?</Link>
-        </div>
-      </Form>
+          <InputField label="Confirm Password" name="confirmPassword" type="password" placeholder="••••••••" />
+
+          <Button type="submit" variant="primary" className={styles.signUpBtn}>Sign Up</Button>
+
+          <Link to='/auth/signin' className={styles.signUpLink}>Already Signed up?</Link>
+        </Form>
+      </Formik>
     </div>
   );
 };
+
+
 
 export default SignUp;

@@ -1,9 +1,21 @@
 import React from 'react';
 import styles from './styles.module.sass';
-import { Form, Button } from 'react-bootstrap';
+import { Formik, Form } from 'formik';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import InputField from 'components/InputField';
+import { signInValSchema } from 'common/models/formik/validationSchema';
 
-const SignIn = () => {
+const initialValues = {
+  email: '',
+  password: ''
+};
+
+const SignIn = ({ loginUser }) => {
+  const onSubmit = values => {
+    loginUser(values);
+  };
+
   return (
     <div className={styles.SignIn}>
       <h1 className={styles.title}>Welcome</h1>
@@ -13,21 +25,15 @@ const SignIn = () => {
         <Link to='/auth/signup'>Create an account</Link>
       </div>
 
-      <Form className={styles.form}>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="user@gmail.com" />
-        </Form.Group>
+      <Formik initialValues={initialValues} validationSchema={signInValSchema} onSubmit={onSubmit}>
+        <Form className={styles.form}>
+          <InputField label="Email" name="email" type="email" placeholder="example@gmail.com" />
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="••••••••" />
-        </Form.Group>
+          <InputField label="Password" name="password" type="password" placeholder="••••••••" />
 
-        <Button variant="primary">
-          Sign In
-        </Button>
-      </Form>
+          <Button type="submit" variant="primary" className={styles.signInBtn}>Sign In</Button>
+        </Form>
+      </Formik>
     </div>
   );
 };

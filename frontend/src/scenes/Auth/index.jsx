@@ -2,8 +2,10 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import SignUp from 'scenes/Auth/components/SignUp';
 import SignIn from 'scenes/Auth/components/SignIn';
+import { connect } from 'react-redux';
+import { signUpUserRoutine, signInUserRoutine } from 'scenes/Auth/routines';
 
-const Auth = () => {
+const Auth = ({ signInUser, addNewUser }) => {
   return (
     <Switch>
       <Route exact path='/auth/signin' component={SignIn} />
@@ -13,4 +15,9 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+const mapDispatchToProps = {
+  signInUser: signInUserRoutine,
+  signUpUser: signUpUserRoutine
+};
+
+export default connect(null, mapDispatchToProps)(Auth);

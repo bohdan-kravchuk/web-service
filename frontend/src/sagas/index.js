@@ -1,3 +1,8 @@
+import { all } from 'redux-saga/effects';
+import authSaga from 'scenes/Auth/sagas';
+
 export default function* rootSaga() {
-  console.log("Example saga reached");
+  yield all([
+    authSaga()
+  ]);
 }

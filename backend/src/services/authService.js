@@ -1,7 +1,7 @@
 import userRepository from '../repositories/userRepository';
 
-export const signUp = ({ email, password }) => {
-  return userRepository.createUser(email, password);
+export const signUp = ({ email, password, fullName }) => {
+  return userRepository.createUser({ email, password, fullName });
 };
 
 export const signIn = async ({ email, password }) => {

@@ -14,8 +14,8 @@ class UserRepository extends BaseRepository {
     return this.collection.where({ email }).findOne();
   }
 
-  async createUser(email, password) {
-    const user = new this.collection({ email, password});
+  async createUser(newUser) {
+    const user = new this.collection(newUser);
     await user.save();
     return user;
   }
