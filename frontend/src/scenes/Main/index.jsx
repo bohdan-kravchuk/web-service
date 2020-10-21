@@ -6,6 +6,7 @@ import { msInOneSec } from 'common/variables/constants';
 import { pluralize } from 'common/helpers/globalHelpers';
 import { getStorageTimerValue, setStorageTimerValue } from 'common/helpers/storageHelper';
 import { updateCountersRoutine } from 'scenes/Main/routines';
+import Header from 'containers/Header';
 
 const storageTimerValue = Number(getStorageTimerValue());
 let timer;
@@ -44,20 +45,25 @@ const Main = ({ counters, _id, updateCounters }) => {
   };
 
   return (
-    <div className={styles.Main}>
-      {counters.map((counter, ind) => (
-        <div className={styles.btnBlock} key={ind}>
-          <Button disabled={!!timerValue} className={styles.btn} onClick={() => onBtnClick(ind)}>
-            {`Button ${ind + 1}`}
-          </Button>
-          <div className={styles.count}>
-            {`Clicked: ${pluralize(counter, 'time')}`}
-          </div>
-        </div>
-      ))}
+    <>
+      <Header />
 
-      {!!timerValue && <div className={styles.timer}>{timerValue}</div>}
-    </div>
+      <div className={styles.container}>
+        {counters.map((counter, ind) => (
+          <div className={styles.btnBlock} key={ind}>
+            <Button disabled={!!timerValue} className={styles.btn} onClick={() => onBtnClick(ind)}>
+              {`Button ${ind + 1}`}
+            </Button>
+
+            <div className={styles.count}>
+              {`Clicked: ${pluralize(counter, 'time')}`}
+            </div>
+          </div>
+        ))}
+
+        {!!timerValue && <div className={styles.timer}>{timerValue}</div>}
+      </div>
+    </>
   );
 };
 

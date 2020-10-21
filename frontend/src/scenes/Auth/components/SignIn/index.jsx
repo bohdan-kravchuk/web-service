@@ -4,7 +4,7 @@ import { Formik, Form } from 'formik';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import InputField from 'components/InputField';
-import { signInValSchema } from 'common/models/formik/validationSchema';
+import { signInValSchema } from 'common/formik/validationSchema';
 
 const initialValues = {
   email: '',

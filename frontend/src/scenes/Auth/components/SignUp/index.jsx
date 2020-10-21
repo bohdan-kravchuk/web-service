@@ -3,7 +3,7 @@ import styles from './styles.module.sass';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Formik, Form } from 'formik';
-import { signUpValSchema } from 'common/models/formik/validationSchema';
+import { signUpValSchema } from 'common/formik/validationSchema';
 import InputField from 'components/InputField';
 
 const initialValues = {
