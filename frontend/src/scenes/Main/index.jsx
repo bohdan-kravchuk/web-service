@@ -1,31 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import styles from './styles.module.sass';
 import { Button } from 'react-bootstrap';
 import { msInOneSec } from 'common/variables/constants';
 import { pluralize } from 'common/helpers/globalHelpers';
-import { getStorageCounters, getStorageTimerValue, setStorageCounters, setStorageTimerValue } from 'common/helpers/storageHelper';
+import { getStorageTimerValue, setStorageTimerValue } from 'common/helpers/storageHelper';
+import { updateCountersRoutine } from 'scenes/Main/routines';
 
 const storageTimerValue = Number(getStorageTimerValue());
 let timer;
 
-const Main = () => {
+const Main = ({ counters, _id, updateCounters }) => {
   const [timerValue, setTimerValue] = useState(storageTimerValue || null);
-  const [disabled, setDisabled] = useState(Boolean(timerValue));
-  const [counters, setCounters] = useState(getStorageCounters() || [0, 0, 0]);
 
   useEffect(() => {
     if (storageTimerValue) startTimer(storageTimerValue);
-
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
     setStorageTimerValue(timerValue);
   }, [timerValue]);
-
-  useEffect(() => {
-    setStorageCounters(counters);
-  }, [counters]);
 
   const startTimer = seconds => {
     timer = setTimeout(function tick() {
@@ -36,18 +31,15 @@ const Main = () => {
         timer = setTimeout(tick, msInOneSec);
       } else {
         setTimerValue(null);
-        setDisabled(false);
       }
     }, msInOneSec);
-  }
+  };
 
   const onBtnClick = index => {
     const seconds = 20;
-
     setTimerValue(seconds);
-    setDisabled(true);
-    setCounters(prevState => prevState.map((el, ind) => ind === index ? el + 1 : el));
-
+    const updatedCounters = counters.map((counter, ind) => ind === index ? counter + 1 : counter)
+    updateCounters({ _id, counters: updatedCounters});
     startTimer(seconds);
   };
 
@@ -55,7 +47,7 @@ const Main = () => {
     <div className={styles.Main}>
       {counters.map((counter, ind) => (
         <div className={styles.btnBlock} key={ind}>
-          <Button disabled={disabled} className={styles.btn} onClick={() => onBtnClick(ind)}>
+          <Button disabled={!!timerValue} className={styles.btn} onClick={() => onBtnClick(ind)}>
             {`Button ${ind + 1}`}
           </Button>
           <div className={styles.count}>
@@ -69,4 +61,13 @@ const Main = () => {
   );
 };
 
-export default Main;
+const mapStateToProps = state => ({
+  counters: state.user.user.counters,
+  _id: state.user.user._id
+});
+
+const mapDispatchToProps = {
+  updateCounters: updateCountersRoutine
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

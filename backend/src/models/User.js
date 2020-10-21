@@ -18,6 +18,10 @@ const userSchema = new Schema(
     isAdmin: {
       type: String,
       default: false
+    },
+    counters: {
+      type: [Number],
+      default: [0, 0, 0]
     }
   },
   {

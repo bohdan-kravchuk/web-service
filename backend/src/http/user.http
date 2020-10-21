@@ -7,7 +7,8 @@ Content-Type: application/json
 
 {
   "email": "test@gmail.com",
-  "password": "password"
+  "password": "password",
+  "fullName": "Bohdan"
 }
 ###
 
@@ -17,5 +18,16 @@ Content-Type: application/json
 {
   "email": "test1@gmail.com",
   "password": "password"
+}
+###
+
+PUT http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+  "_id": "5f901ffdeb35642320b3f8f5",
+  "userData": {
+    "email": "test@mail.com"
+  }
 }
 ###

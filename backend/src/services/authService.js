@@ -1,7 +1,9 @@
 import userRepository from '../repositories/userRepository';
+import { fromUserToUserClient } from '../mappers/user';
 
-export const signUp = ({ email, password, fullName }) => {
-  return userRepository.createUser({ email, password, fullName });
+export const signUp = async ({ email, password, fullName }) => {
+  const user = await userRepository.createUser({ email, password, fullName });
+  return fromUserToUserClient(user);
 };
 
 export const signIn = async ({ email, password }) => {
@@ -13,5 +15,5 @@ export const signIn = async ({ email, password }) => {
     throw new Error('Wrong password');
   }
 
-  return user;
+  return fromUserToUserClient(user);
 };
