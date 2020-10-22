@@ -2,6 +2,7 @@ import userRepository from '../repositories/userRepository';
 import { fromUserToUserClient } from '../mappers/user';
 import { createToken } from '../helpers/tokenHelper';
 import { hash, compare } from '../helpers/encryptHelper';
+import CustomError from '../helpers/errorsHelper';
 
 export const signUp = async ({ email, password, fullName }) => {
   const passwordHash = await hash(password);
@@ -14,12 +15,12 @@ export const signUp = async ({ email, password, fullName }) => {
 
 export const signIn = async ({ email, password }) => {
   const user = await userRepository.getUserByEmail(email);
-  if (!user) throw new Error('No user with such email');
+  if (!user) throw new CustomError(404, "Such user isn't exist. Please, sign up first.");
 
   const comparePassword = await compare(password, user.password);
 
   if (!comparePassword) {
-    throw new Error('Wrong credentials. Please, try again.');
+    throw new CustomError(400, 'Wrong credentials. Please, try again.');
   }
 
   return {

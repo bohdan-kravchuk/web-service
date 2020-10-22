@@ -6,6 +6,7 @@ import { env } from './env';
 import routes from './routes';
 import authorizationMiddleware from './middlewares/authorizationMiddleware';
 import routesWhiteList from './configs/routesWhiteListConfig';
+import errorHandlerMiddleware from './middlewares/errorHandlerMiddleware';
 import './configs/passportConfig';
 
 const { app: { port }, mongoDbUrl } = env;
@@ -18,6 +19,8 @@ app.use(passport.initialize());
 app.use('/api', authorizationMiddleware(routesWhiteList));
 
 routes(app);
+
+app.use(errorHandlerMiddleware);
 
 async function start() {
   try {
