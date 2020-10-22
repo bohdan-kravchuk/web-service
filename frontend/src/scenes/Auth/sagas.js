@@ -7,6 +7,7 @@ function* signUpUser({ payload }) {
     const user = yield call(signUp, payload);
     yield put(signUpUserRoutine.success(user));
   } catch (error) {
+    yield put(signUpUserRoutine.failure());
     console.log(error.message);
   }
 }
@@ -20,6 +21,7 @@ function* signInUser({ payload }) {
     const user = yield call(signIn, payload);
     yield put(signInUserRoutine.success(user));
   } catch (error) {
+    yield put(signInUserRoutine.failure());
     console.log(error.message);
   }
 }

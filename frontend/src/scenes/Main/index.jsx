@@ -6,7 +6,6 @@ import { msInOneSec } from 'common/variables/constants';
 import { pluralize } from 'common/helpers/globalHelpers';
 import { getStorageTimerValue, setStorageTimerValue } from 'common/helpers/storageHelper';
 import { updateCountersRoutine } from 'scenes/Main/routines';
-import Header from 'containers/Header';
 
 const storageTimerValue = Number(getStorageTimerValue());
 let timer;
@@ -45,10 +44,7 @@ const Main = ({ counters, _id, updateCounters }) => {
   };
 
   return (
-    <>
-      <Header />
-
-      <div className={styles.container}>
+      <div className={styles.Main}>
         {counters.map((counter, ind) => (
           <div className={styles.btnBlock} key={ind}>
             <Button disabled={!!timerValue} className={styles.btn} onClick={() => onBtnClick(ind)}>
@@ -63,7 +59,6 @@ const Main = ({ counters, _id, updateCounters }) => {
 
         {!!timerValue && <div className={styles.timer}>{timerValue}</div>}
       </div>
-    </>
   );
 };
 

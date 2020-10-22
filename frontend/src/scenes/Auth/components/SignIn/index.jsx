@@ -28,9 +28,7 @@ const SignIn = ({ signInUser }) => {
       <Formik initialValues={initialValues} validationSchema={signInValSchema} onSubmit={onSubmit}>
         <Form className={styles.form}>
           <InputField label="Email" name="email" type="email" placeholder="example@gmail.com" />
-
           <InputField label="Password" name="password" type="password" placeholder="••••••••" />
-
           <Button type="submit" variant="primary" className={styles.signInBtn}>Sign In</Button>
         </Form>
       </Formik>
