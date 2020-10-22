@@ -7,13 +7,14 @@ import { pluralize } from 'common/helpers/globalHelpers';
 import { getStorageTimerValue, setStorageTimerValue } from 'common/helpers/storageHelper';
 import { updateCountersRoutine } from 'scenes/Main/routines';
 
-const storageTimerValue = Number(getStorageTimerValue());
 let timer;
 
 const Main = ({ counters, _id, updateCounters }) => {
-  const [timerValue, setTimerValue] = useState(storageTimerValue || null);
+  const [timerValue, setTimerValue] = useState(null);
 
   useEffect(() => {
+    const storageTimerValue = Number(getStorageTimerValue()) || null;
+    setTimerValue(storageTimerValue);
     if (storageTimerValue) startTimer(storageTimerValue);
     return () => clearTimeout(timer);
   }, []);
