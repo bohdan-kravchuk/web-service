@@ -1,8 +1,9 @@
-import { getUsersRoutine } from 'scenes/Dashboard/routines';
+import { deleteUserRoutine, getUsersRoutine } from 'scenes/Dashboard/routines';
 
 const initialState = {
   users: [],
-  isLoading: false
+  isLoading: false,
+  deletedUserId: null
 };
 
 export const dashboard = (state = initialState, { type, payload }) => {
@@ -13,6 +14,12 @@ export const dashboard = (state = initialState, { type, payload }) => {
       return { ...state, users: payload, isLoading: false };
     case getUsersRoutine.FAILURE:
       return { ...state, isLoading: false };
+    case deleteUserRoutine.TRIGGER:
+      return { ...state, deletedUserId: payload };
+    case deleteUserRoutine.SUCCESS:
+      return { ...state, users: state.users.filter(user => user._id !== payload), deletedUserId: null };
+    case deleteUserRoutine.FAILURE:
+      return { ...state, deletedUserId: null };
     default:
       return state;
   }

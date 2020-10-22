@@ -2,18 +2,18 @@ import { signInUserRoutine, signUpUserRoutine } from 'scenes/Auth/routines';
 import { updateCountersRoutine } from 'scenes/Main/routines';
 
 const initialState = {
-  // isAuthorized: false,
-  // user: {},
-  isLoading: false,
-  isAuthorized: true,
-  user: {
-    _id: 1,
-    isAdmin: true,
-    counters: [0, 0, 0],
-    email: "test@mail.com",
-    password: "password",
-    fullName: "Bohdan"
-  }
+  isAuthorized: false,
+  user: {},
+  isLoading: false
+  // isAuthorized: true,
+  // user: {
+  //   _id: "5f90416f12ed483074dac0fc",
+  //   isAdmin: true,
+  //   counters: [0, 0, 0],
+  //   email: "test@mail.com",
+  //   password: "password",
+  //   fullName: "Bohdan"
+  // }
 };
 
 export const user = (state = initialState, { type, payload }) => {

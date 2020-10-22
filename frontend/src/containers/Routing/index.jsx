@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Switch } from 'react-router-dom';
+import { Redirect, Switch } from 'react-router-dom';
 import Auth from 'scenes/Auth';
 import Main from 'scenes/Main';
 import PublicRoute from 'containers/PublicRoute';
@@ -17,6 +17,7 @@ const Routing = ({ isAuthorized }) => {
         <PrivateRoute exact path='/' component={Main} />
         <PublicRoute exact path='/auth/:page' component={Auth} />
         <ProtectedRoute exact path='/dashboard' component={Dashboard} />
+        <Redirect to='/' />
       </Switch>
     </>
   );

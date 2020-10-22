@@ -23,6 +23,10 @@ class UserRepository extends BaseRepository {
   updateUser(_id, userData) {
     return this.collection.updateOne({ _id }, userData);
   }
+
+  deleteUser(_id) {
+    return this.collection.deleteOne({ _id });
+  }
 }
 
 export default new UserRepository();
