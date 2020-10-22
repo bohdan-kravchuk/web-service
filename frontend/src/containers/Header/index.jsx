@@ -6,7 +6,9 @@ import { Link } from 'react-router-dom';
 const Header = ({ isAdmin }) => {
   return (
     <div className={styles.Header}>
-      <div className={styles.logo}>Web service</div>
+      <div className={styles.logo}>
+        <Link to='/'>Web service</Link>
+      </div>
       {isAdmin && <Link to='/dashboard' className={styles.menuLink}>Dashboard</Link>}
     </div>
   );
