@@ -1,4 +1,5 @@
 import { clearStorage } from 'common/helpers/storageHelper';
+import { toastrError } from 'common/helpers/toastrHelper';
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import { fetchUserRoutine } from 'routines/user';
 import { fetchUser } from 'services/userService';
@@ -10,7 +11,7 @@ function* fetchUserRequest() {
   } catch (e) {
     yield call(clearStorage);
     yield put(fetchUserRoutine.failure());
-    console.log(e.message);
+    yield call(toastrError, e.message);
   }
 }
 

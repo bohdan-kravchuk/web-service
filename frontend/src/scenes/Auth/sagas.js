@@ -1,4 +1,5 @@
 import { setAccessToken } from 'common/helpers/storageHelper';
+import { toastrError } from 'common/helpers/toastrHelper';
 import { all, takeEvery, call, put } from 'redux-saga/effects';
 import { signInUserRoutine, signUpUserRoutine } from 'scenes/Auth/routines';
 import { signIn, signUp } from 'services/authService';
@@ -8,9 +9,9 @@ function* signUpUser({ payload: userData }) {
     const { user, accessToken } = yield call(signUp, userData);
     setAccessToken(accessToken);
     yield put(signUpUserRoutine.success(user));
-  } catch (error) {
+  } catch (e) {
     yield put(signUpUserRoutine.failure());
-    console.log(error.message);
+    yield call(toastrError, e.message);
   }
 }
 
@@ -23,9 +24,9 @@ function* signInUser({ payload: credentials }) {
     const { user, accessToken } = yield call(signIn, credentials);
     setAccessToken(accessToken);
     yield put(signInUserRoutine.success(user));
-  } catch (error) {
+  } catch (e) {
     yield put(signInUserRoutine.failure());
-    console.log(error.message);
+    yield call(toastrError, e.message);
   }
 }
 

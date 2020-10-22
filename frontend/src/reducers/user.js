@@ -15,13 +15,13 @@ export const user = (state = initialState, { type, payload }) => {
     case fetchUserRoutine.TRIGGER:
       return { ...state, isLoading: true };
 
-    case signUpUserRoutine.SUCCESS:
-      return { ...state, user: payload, isAuthorized: true, isLoading: false };
-
     case signUpUserRoutine.FAILURE:
     case signInUserRoutine.FAILURE:
     case fetchUserRoutine.FAILURE:
       return { ...state, isLoading: false };
+
+    case signUpUserRoutine.SUCCESS:
+      return { ...state, user: payload, isAuthorized: true, isLoading: false };
 
     case signInUserRoutine.SUCCESS:
       return { ...state, user: payload, isAuthorized: true, isLoading: false };

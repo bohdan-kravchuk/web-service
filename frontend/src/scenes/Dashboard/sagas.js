@@ -1,3 +1,4 @@
+import { toastrError, toastrSuccess } from 'common/helpers/toastrHelper';
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import { deleteUserRoutine, getUsersRoutine } from 'scenes/Dashboard/routines';
 import { deleteUser, getUsers } from 'services/userService';
@@ -8,7 +9,7 @@ function* getUsersRequest() {
     yield put(getUsersRoutine.success(users));
   } catch (e) {
     yield put(getUsersRoutine.failure());
-    console.log(e.message);
+    yield call(toastrError, e.message);
   }
 }
 
@@ -20,9 +21,10 @@ function* deleteUserRequest({ payload: id }) {
   try {
     yield call(deleteUser, id);
     yield put(deleteUserRoutine.success(id));
+    yield call(toastrSuccess, 'User was deleted successfully');
   } catch (e) {
     yield put(deleteUserRoutine.failure());
-    console.log(e.message);
+    yield call(toastrError, e.message);
   }
 }
 

@@ -14,6 +14,7 @@ import { fetchUserRoutine } from 'routines/user';
 
 const Routing = ({ isAuthorized, isLoading, fetchUser }) => {
   const hasToken = Boolean(getAccessToken());
+
   useEffect(() => {
     if (hasToken && !isAuthorized && !isLoading) {
       fetchUser();
@@ -23,7 +24,7 @@ const Routing = ({ isAuthorized, isLoading, fetchUser }) => {
   return (
     <>
       { isAuthorized && <Header /> }
-      <LoaderWrapper loading={isLoading}>
+      <LoaderWrapper loading={isLoading || (hasToken && !isAuthorized)}>
         <Switch>
           <PrivateRoute exact path='/' component={Main} />
           <PublicRoute exact path='/auth/:page' component={Auth} />
