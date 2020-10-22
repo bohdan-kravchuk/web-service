@@ -10,4 +10,4 @@ export const updateUser = ({ _id, userData }) => {
 
 export const deleteUser = _id => {
   return userRepository.deleteUser(_id);
-}
+};

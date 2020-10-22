@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Switch } from 'react-router-dom';
 import Auth from 'scenes/Auth';
@@ -9,8 +9,17 @@ import Header from 'containers/Header';
 import ProtectedRoute from 'containers/ProtectedRoute';
 import Dashboard from 'scenes/Dashboard';
 import { LoaderWrapper } from 'components/LoaderWrapper';
+import { getAccessToken } from 'common/helpers/storageHelper';
+import { fetchUserRoutine } from 'routines/user';
 
-const Routing = ({ isAuthorized, isLoading}) => {
+const Routing = ({ isAuthorized, isLoading, fetchUser }) => {
+  const hasToken = Boolean(getAccessToken());
+  useEffect(() => {
+    if (hasToken && !isAuthorized && !isLoading) {
+      fetchUser();
+    }
+  });
+
   return (
     <>
       { isAuthorized && <Header /> }
@@ -31,4 +40,8 @@ const mapStateToProps = state => ({
   isLoading: state.user.isLoading
 });
 
-export default connect(mapStateToProps)(Routing);
+const mapDispatchToProps = {
+  fetchUser: fetchUserRoutine
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Routing);

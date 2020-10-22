@@ -1,5 +1,5 @@
 import api from 'common/helpers/apiHelper';
 
-export const signIn = user => api.post('/api/auth/signin', user);
+export const signIn = credentials => api.post('/api/auth/signin', credentials);
 
-export const signUp = newUser => api.post('/api/auth/signup', newUser);
+export const signUp = userData => api.post('/api/auth/signup', userData);

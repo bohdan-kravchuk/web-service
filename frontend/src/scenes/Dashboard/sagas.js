@@ -22,7 +22,7 @@ function* deleteUserRequest({ payload: id }) {
     yield put(deleteUserRoutine.success(id));
   } catch (e) {
     yield put(deleteUserRoutine.failure());
-    console.log(e);
+    console.log(e.message);
   }
 }
 

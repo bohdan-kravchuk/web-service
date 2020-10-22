@@ -6,6 +6,7 @@ const router = Router();
 
 router
   .get('/', run(() => getUsers()))
+  .get('/me', run(req => Promise.resolve(req.user)))
   .put('/', run(req => updateUser(req.body)))
   .delete('/', run(req => deleteUser(req.body._id)));
 

@@ -1,10 +1,12 @@
+import { setAccessToken } from 'common/helpers/storageHelper';
 import { all, takeEvery, call, put } from 'redux-saga/effects';
 import { signInUserRoutine, signUpUserRoutine } from 'scenes/Auth/routines';
 import { signIn, signUp } from 'services/authService';
 
-function* signUpUser({ payload }) {
+function* signUpUser({ payload: userData }) {
   try {
-    const user = yield call(signUp, payload);
+    const { user, accessToken } = yield call(signUp, userData);
+    setAccessToken(accessToken);
     yield put(signUpUserRoutine.success(user));
   } catch (error) {
     yield put(signUpUserRoutine.failure());
@@ -16,9 +18,10 @@ function* watchSignUpUser() {
   yield takeEvery(signUpUserRoutine.TRIGGER, signUpUser);
 }
 
-function* signInUser({ payload }) {
+function* signInUser({ payload: credentials }) {
   try {
-    const user = yield call(signIn, payload);
+    const { user, accessToken } = yield call(signIn, credentials);
+    setAccessToken(accessToken);
     yield put(signInUserRoutine.success(user));
   } catch (error) {
     yield put(signInUserRoutine.failure());

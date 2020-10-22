@@ -7,7 +7,7 @@ function* updateCounters({ payload }) {
     const { _id, counters } = payload;
     yield call(updateUser, _id, { counters });
   } catch (e) {
-    console.log(e);
+    console.log(e.message);
   }
 }
 

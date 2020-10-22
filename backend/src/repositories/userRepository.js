@@ -14,6 +14,10 @@ class UserRepository extends BaseRepository {
     return this.collection.findOne({ email });
   }
 
+  getUserById(_id) {
+    return this.collection.findOne({ _id }, '_id fullName email isAdmin counters');
+  }
+
   async createUser(newUser) {
     const user = new this.collection(newUser);
     await user.save();

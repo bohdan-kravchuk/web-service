@@ -5,3 +5,5 @@ export const updateUser = (_id, userData) => api.put('/api/users', { _id, userDa
 export const getUsers = () => api.get('/api/users');
 
 export const deleteUser = _id => api.delete('/api/users', { _id });
+
+export const fetchUser = () => api.get('/api/users/me');

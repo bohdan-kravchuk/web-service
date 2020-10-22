@@ -1,12 +1,12 @@
 import { stringifyUrl } from 'query-string';
 import { env } from 'env';
 import { pipe, anyPass, map, mergeRight, pickBy, is } from 'ramda';
-// import { setTokens, getRefreshToken, getAccessToken } from './storageHelper';
+import { getAccessToken } from './storageHelper';
 
 const getInitHeaders = (contentType = 'application/json', hasContent = true) => {
   const headers = new Headers();
 
-  // headers.set('Authorization', `Bearer ${getAccessToken()}`);
+  headers.set('Authorization', `Bearer ${getAccessToken()}`);
   if (hasContent) {
     headers.set('Content-Type', contentType);
   }
