@@ -7,7 +7,7 @@ class UserRepository extends BaseRepository {
   }
 
   getUsers() {
-    return this.collection.find({}, '_id fullName email isAdmin counters');
+    return this.collection.find({}, '_id fullName email isAdmin counters password');
   }
 
   getUserByEmail(email) {
