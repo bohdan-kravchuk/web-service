@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import { refreshTokenSchema } from './RefreshToken';
 
 const userSchema = new Schema(
   {
@@ -22,7 +23,8 @@ const userSchema = new Schema(
     counters: {
       type: [Number],
       default: [0, 0, 0]
-    }
+    },
+    refreshToken: refreshTokenSchema
   },
   {
     timestamps: true

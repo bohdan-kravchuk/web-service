@@ -24,9 +24,11 @@ app.use(errorHandlerMiddleware);
 
 async function start() {
   try {
+    mongoose.set('useCreateIndex', true);
     await mongoose.connect(mongoDbUrl, {
-      useNewUrlParser: 'true',
-      useUnifiedTopology: 'true'
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false
     });
     app.listen(port, () => {
       console.log(`Server is running at ${port}`);

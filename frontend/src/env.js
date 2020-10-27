@@ -4,4 +4,4 @@ export const env = {
   urls: {
     server: getOsEnv('REACT_APP_SERVER')
   }
-}
+};

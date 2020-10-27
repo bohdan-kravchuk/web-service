@@ -7,7 +7,7 @@ POST http://localhost:3001/api/auth/signup
 Content-Type: application/json
 
 {
-  "email": "test@gmail.com",
+  "email": "tess1@gmail.com",
   "password": "password",
   "fullName": "test"
 }
@@ -17,8 +17,16 @@ POST http://localhost:3001/api/auth/signin
 Content-Type: application/json
 
 {
-  "email": "test1@gmail.com",
+  "email": "tess@gmail.com",
   "password": "password"
+}
+###
+
+POST http://localhost:3001/api/auth/tokens
+Content-Type: application/json
+
+{
+  "refreshToken": "ff1fca5bb0e9d4c41384df083582515fcfa5ba6ad6c2b3f0a5c26706e49e7634cdbf316c00cca7aa23fb67b4420adc675723816c122af0d471c921f78bda1196585a9a2e5ab92dd6e90d32784409001548f79a17019db80ef5ea13416399928b91998a7ae637d75e2a70f658214c6da56be6c8fb62379a8b"
 }
 ###
 
